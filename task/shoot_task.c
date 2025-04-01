@@ -1,0 +1,219 @@
+#include "shoot_task.h"
+
+#include "string.h"
+#include "cmsis_os.h"
+
+#include "pid.h"
+
+#include "bsp_remote_ET08.h"
+#include "micro_swicth.h"
+
+#include "can_comm.h"
+#include "modeswitch_task.h"
+
+
+PID_TypeDef fric_motor_pid_t[2];
+
+extern osThreadId can_send_task_handle;
+
+shoot_t shoot;
+shoot_fsm_t shoot_fsm;
+
+static void Shoot_Motor_Init(void);
+static void Shoot_Control(void);
+static void Shoot_data_update(void);
+static void Shoot_Current_Set(void);
+
+static void shoot_mode_sw(shoot_fsm_t *shoot_fsm); 
+static void shoot_status_transition(shoot_fsm_t *shoot_fsm);
+
+static void Shoot_Status_Init(void);
+static void shoot_protect_handler(void);
+static void shoot_remote_handler(void);
+static void shoot_auto_handler(void);
+
+void FricMotor_Mode_Change(shoot_mode_e shoot_mode);
+
+void Shoot_Task(void const *argu)
+{
+	uint32_t mode_wake_time = osKernelSysTick();
+	Shoot_Motor_Init();
+	while (1)
+	{
+		shoot_mode_sw(&shoot_fsm);
+		Shoot_Control();
+		Shoot_data_update();
+		osSignalSet(can_send_task_handle, SHOOT_MOTOR_MSG_SEND);
+		osDelayUntil(&mode_wake_time, SHOOT_PERIOD);
+	}
+}
+
+static void Shoot_data_update(void)
+{
+	shoot.fric_spd_fbd[R] = fric_motor_data[R].speed_rpm;
+	shoot.fric_spd_fbd[L] = fric_motor_data[L].speed_rpm;
+}
+
+static void Shoot_PID_calu(void)
+{
+	shoot.fric_current[R] = PID_Calculate(&fric_motor_pid_t[R], shoot.fric_spd_fbd[R], shoot.fric_spd_ref[R]);
+	shoot.fric_current[L] = PID_Calculate(&fric_motor_pid_t[L], shoot.fric_spd_fbd[L], shoot.fric_spd_ref[L]);
+}
+
+static void Shoot_Control(void)
+{
+	Shoot_PID_calu();
+	Shoot_Current_Set();
+}
+
+static void Shoot_Current_Set(void)
+{
+	motor_current.fric[L] = shoot.fric_current[L];
+	motor_current.fric[R] = shoot.fric_current[R];
+}
+
+static void Shoot_Motor_Init(void)
+{
+	Shoot_Status_Init();
+	
+	PID_Init(&fric_motor_pid_t[R], MG3508_MAX_CURRENT, 0, 3, \
+								1, 0, 0, \
+								0, 0, \
+								0, 0, Integral_Limit|ErrorHandle);
+	
+	PID_Init(&fric_motor_pid_t[L], MG3508_MAX_CURRENT, 0, 3, \
+								1, 0, 0, \
+								0, 0, \
+								0, 0, Integral_Limit|ErrorHandle);
+}
+
+static void shoot_mode_sw(shoot_fsm_t *shoot_fsm) //SC上保护中单发下连发
+{
+	shoot_fsm->shoot_status_handler();
+	shoot_status_transition(shoot_fsm);
+    /* 模式切换 */
+    switch (shoot_fsm->status) {
+        case SHOOT_PROTECT: {
+			FricMotor_Mode_Change(SHOOT_PROTECT_MODE);
+            break;
+        }
+        case SHOOT_REMOTE: {
+            /* 摩擦轮和拨盘模式切换 */
+			if(reload_zero == FOUND && gimbal_zero == FOUND)//装填电机和云台已完成初始化
+			{
+					switch(SBUS.SC)
+					{
+						case SW_UP:
+							FricMotor_Mode_Change(SHOOT_PROTECT_MODE);
+							break;
+						case SW_MI:
+							FricMotor_Mode_Change(SHOOT_SINGLE_MODE);
+							break;
+						case SW_DN:
+							FricMotor_Mode_Change(SHOOT_SERIES_MODE);
+							break;
+						default:
+							break;
+					}
+			}	
+ 			else 
+			{
+				FricMotor_Mode_Change(SHOOT_PROTECT_MODE);
+			//	等待电机初始化
+				break;
+			}
+			break;
+		}
+        case SHOOT_AUTO: {
+				//视觉
+			break;
+		default:break;
+	}
+	}
+}	
+
+static void shoot_status_transition(shoot_fsm_t *fsm)
+{
+		switch(fsm->status){
+		case SHOOT_LOCK:
+			if(fsm->event == SHOOT_UNLOCK_OPERATION){
+				fsm->status = SHOOT_PROTECT;
+				fsm->shoot_status_handler = shoot_protect_handler;
+			}
+			break;
+		case SHOOT_PROTECT:
+			if(fsm->event == SHOOT_REMOTE_OPERATION){
+				fsm->status = SHOOT_REMOTE;
+				fsm->shoot_status_handler = shoot_remote_handler;
+			}
+			break;
+		case SHOOT_REMOTE:
+			if(fsm->event == SHOOT_PROTECT_OPERATION){
+				fsm->status = SHOOT_PROTECT;
+				fsm->shoot_status_handler = shoot_protect_handler;
+			}else if(fsm->event == SHOOT_AUTO_OPERATION){
+				fsm->status = SHOOT_AUTO;
+				fsm->shoot_status_handler = shoot_auto_handler;
+			}
+			break;
+		case SHOOT_AUTO:
+			if(fsm->event == SHOOT_PROTECT_OPERATION){
+				fsm->status = SHOOT_PROTECT;
+				fsm->shoot_status_handler = shoot_protect_handler;
+			}else if(fsm->event == SHOOT_REMOTE_OPERATION){
+				fsm->status = SHOOT_REMOTE;
+				fsm->shoot_status_handler = shoot_remote_handler;
+			}
+			break;
+		default:
+			break;
+	}
+	fsm->event = SHOOT_NULL_EVENT;
+}
+
+static void shoot_lock_handler(void)
+{
+	if(lock_flag == UNLOCK)
+		shoot_fsm.event = SHOOT_UNLOCK_OPERATION;
+}
+
+static void shoot_protect_handler(void)
+{
+	if(ctrl_mode == PROTECT_MODE || ctrl_mode == INIT_MODE)
+		shoot_fsm.event = SHOOT_REMOTE_OPERATION;
+}
+
+static void shoot_remote_handler(void)
+{
+	if(ctrl_mode == PROTECT_MODE)
+		shoot_fsm.event = SHOOT_PROTECT_OPERATION;
+	
+	else if(ctrl_mode == VISION_MODE)
+		shoot_fsm.event = SHOOT_AUTO_OPERATION;
+}
+
+static void shoot_auto_handler(void)
+{
+	if(ctrl_mode == PROTECT_MODE)
+		shoot_fsm.event = SHOOT_PROTECT_OPERATION;
+	
+	else if(ctrl_mode == REMOTE_MODE||ctrl_mode == KEYBOARD_MODE)
+		shoot_fsm.event = SHOOT_REMOTE_OPERATION;
+}
+
+void FricMotor_Mode_Change(shoot_mode_e fric_mode)
+{
+	static shoot_mode_e last_fric_mode = SHOOT_PROTECT_MODE;
+	UNUSED(last_fric_mode);	
+	
+	shoot.shoot_mode = fric_mode;
+	last_fric_mode = fric_mode;
+}
+
+static void Shoot_Status_Init(void)
+{
+	shoot_fsm.status = SHOOT_LOCK;
+	shoot_fsm.event = SHOOT_NULL_EVENT;
+	shoot_fsm.shoot_status_handler = shoot_lock_handler;
+}
+
