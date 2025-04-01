@@ -42,7 +42,7 @@ void can1_send_message(int16_t TX_ID, int16_t iq1, int16_t iq2, int16_t iq3, int
 struct can_rx_buff
 {
 	CAN_RxHeaderTypeDef header;
-	uint8_t             data[8];
+	uint8_t             data[8]; 
 } can_rx_data;
 
 /* 本地变量，CAN中断回调函数指针 */
