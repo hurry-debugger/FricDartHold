@@ -5,30 +5,28 @@
 #include "cmsis_os.h"
 
 /*****************数据结构体定义**********************/
-frame_header											FrameHeader;		//帧头
+frame_header						FrameHeader;		//帧头
 
-ext_game_state_t									Game_State;
-ext_game_result_t									Game_Result;
-ext_game_robot_HP_t               RobotHP;                   //机器血量
-ext_dart_status_t									Dart_Status;               //飞镖发射状态
-ext_event_data_t									Event_Data;                //事件数据
+ext_game_state_t					Game_State;
+ext_game_result_t					Game_Result;
+ext_game_robot_HP_t               	RobotHP;                   //机器血量
+ext_dart_status_t					Dart_Status;               //飞镖发射状态
+ext_event_data_t					Event_Data;                //事件数据
 ext_supply_projectile_action_t		Supply_Projectile_Action;  //补弹数据
-ext_referee_warning_t							Referee_Warning;           //受罚情况
-ext_dart_info_t					                   Dart_Info;              //飞镖发射相关数据
-ext_game_robot_status_t						Game_Robot_Status;
-ext_power_heat_data_t							Power_Heat_Data;
-ext_game_robot_pos_t							Robot_Position;
-ext_buff_t												Buff;
-ext_aerial_robot_energy_t					Aerial_Robot_Energy;
-ext_robot_hurt_t									Robot_Hurt;
-ext_shoot_data_t									Shoot_Data;
-ext_bullet_remaining_t						Bullet_Remaining;
-ext_rfid_status_t									RFID_Status;
-ext_dart_client_cmd_t							Dart_Client;                //飞镖闸门状态
+ext_referee_warning_t				Referee_Warning;           //受罚情况
+ext_dart_info_t					    Dart_Info;              //飞镖发射相关数据
+ext_game_robot_status_t				Game_Robot_Status;
+ext_power_heat_data_t				Power_Heat_Data;
+ext_game_robot_pos_t				Robot_Position;
+ext_buff_t							Buff;
+ext_aerial_robot_energy_t			Aerial_Robot_Energy;
+ext_robot_hurt_t					Robot_Hurt;
+ext_shoot_data_t					Shoot_Data;
+ext_bullet_remaining_t				Bullet_Remaining;
+ext_rfid_status_t					RFID_Status;
+ext_dart_client_cmd_t				Dart_Client;                //飞镖闸门状态
 robot_interactive_receivedata_t		Comm_getdata;
 /******************************************************/
-
-Verify_CRC16
 
 uint16_t Robot_Self_HP;//自身血量
 

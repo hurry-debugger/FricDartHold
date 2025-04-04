@@ -51,6 +51,7 @@
 "dart_launcher_mount\gimbal_task.o"
 "dart_launcher_mount\modeswitch_task.o"
 "dart_launcher_mount\pid.o"
+"dart_launcher_mount\math_calcu.o"
 --library_type=microlib --strict --scatter "dart_launcher_mount\dart_launcher_mount.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

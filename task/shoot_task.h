@@ -5,7 +5,7 @@
 
 #define SHOOT_PERIOD 			2
 
-#define MG3508_MAX_CURRENT 	16384
+#define MG3508_MAX_CURRENT 	9000
 
 typedef enum{
 	R,
@@ -29,18 +29,20 @@ typedef struct{
 
 /*************  fsr  *****************/
 typedef enum{
-    SHOOT_LOCK = -1,
-    SHOOT_PROTECT = 0,
-    SHOOT_REMOTE = 1,
-    SHOOT_AUTO = 2,
+    SHOOT_LOCK = 0,
+	SHOOT_INIT,
+    SHOOT_PROTECT,
+    SHOOT_REMOTE,
+    SHOOT_AUTO,
 } shoot_status_e;
 
 typedef enum{
     SHOOT_NULL_EVENT = 0,
-    SHOOT_UNLOCK_OPERATION = 1,
-    SHOOT_PROTECT_OPERATION = 2,
-    SHOOT_REMOTE_OPERATION = 3,
-    SHOOT_AUTO_OPERATION = 4
+    SHOOT_UNLOCK_OPERATION,
+    SHOOT_INIT_OPERATION,
+    SHOOT_PROTECT_OPERATION,
+    SHOOT_REMOTE_OPERATION,
+    SHOOT_AUTO_OPERATION
 } shoot_event_e;
 
 typedef struct{

@@ -53,6 +53,22 @@ void DataWavePkg(void)
 			DataScope_Get_Channel_Data(fric_motor_pid_t[L].Iout);			
 			break;
 		}
+		case reload_motor:
+		{
+			DataScope_Get_Channel_Data(reload.start_ecd);
+			DataScope_Get_Channel_Data(reload.now_ecd);
+			DataScope_Get_Channel_Data(reload.spd_fbd);
+			DataScope_Get_Channel_Data(reload.spd_ref);
+			
+			DataScope_Get_Channel_Data(4 * ONE_DART_ECD);
+			
+			DataScope_Get_Channel_Data(reload.current);
+			
+			DataScope_Get_Channel_Data(ctrl_mode);
+			DataScope_Get_Channel_Data(gimbal.gimbal_mode);
+			DataScope_Get_Channel_Data(reload.reload_mode);
+			break;
+		}
 		case gimbal_motor:
 		{
 			DataScope_Get_Channel_Data(gimbal.pos_fbd);
@@ -66,20 +82,6 @@ void DataWavePkg(void)
 			DataScope_Get_Channel_Data(gimbal_spd_pid_t.Pout);
 			DataScope_Get_Channel_Data(gimbal_pos_pid_t.Iout);
 			DataScope_Get_Channel_Data(gimbal_pos_pid_t.Pout);
-			break;
-		}
-		case reload_motor:
-		{
-			DataScope_Get_Channel_Data(reload.pos_fbd);
-			DataScope_Get_Channel_Data(reload.pos_ref);
-			DataScope_Get_Channel_Data(reload.spd_fbd);
-			DataScope_Get_Channel_Data(reload.spd_ref);	
-									   
-			DataScope_Get_Channel_Data(reload.current);
-									   
-			DataScope_Get_Channel_Data(reload_spd_pid_t.Iout);
-			DataScope_Get_Channel_Data(reload_spd_pid_t.Pout);
-			DataScope_Get_Channel_Data(reload_spd_pid_t.Dout);
 			break;
 		}
 

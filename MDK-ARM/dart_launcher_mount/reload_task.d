@@ -48,8 +48,11 @@ dart_launcher_mount\reload_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/in
 dart_launcher_mount\reload_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 dart_launcher_mount\reload_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 dart_launcher_mount\reload_task.o: ../Core/Inc/main.h
+dart_launcher_mount\reload_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+dart_launcher_mount\reload_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 dart_launcher_mount\reload_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 dart_launcher_mount\reload_task.o: ../ToolChain-Math/pid.h
+dart_launcher_mount\reload_task.o: ../bsp/bsp_remote_ET08.h
 dart_launcher_mount\reload_task.o: ../comm/can_comm.h
 dart_launcher_mount\reload_task.o: ../bsp/dji_motor.h
 dart_launcher_mount\reload_task.o: ../comm/micro_swicth.h

@@ -140,11 +140,11 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x67CA5C09)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x67CA5C09)
 I (../comm/can_comm.h)(0x67E8E4C6)
 I (../bsp/dji_motor.h)(0x664F3DD0)
-I (../task/shoot_task.h)(0x67E92F18)
-I (../task/reload_task.h)(0x67EA84B9)
+I (../task/shoot_task.h)(0x67ECE4DB)
+I (../task/reload_task.h)(0x67ED8C82)
 I (../task/modeswitch_task.h)(0x67E8E8F2)
-I (../task/gimbal_task.h)(0x67EA861F)
-I (../task/debug_task.h)(0x67E4CA9B)
+I (../task/gimbal_task.h)(0x67ED8274)
+I (../task/debug_task.h)(0x67ED3F29)
 F (../Core/Src/can.c)(0x67E28918)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\can.o --omf_browse dart_launcher_mount\can.crf --depend dart_launcher_mount\can.d)
 I (../Core/Inc/can.h)(0x67E14D6E)
 I (../Core/Inc/main.h)(0x67E7A1C2)
@@ -1102,7 +1102,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x67CA5C09)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x67CA5C09)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x67CA5C09)
-F (..\bsp\bsp_can.c)(0x67E2832D)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\bsp_can.o --omf_browse dart_launcher_mount\bsp_can.crf --depend dart_launcher_mount\bsp_can.d)
+F (..\bsp\bsp_can.c)(0x67EB9E19)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\bsp_can.o --omf_browse dart_launcher_mount\bsp_can.crf --depend dart_launcher_mount\bsp_can.d)
 I (..\bsp\bsp_can.h)(0x664F3DD0)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B3488)
 I (../Core/Inc/can.h)(0x67E14D6E)
@@ -1183,7 +1183,7 @@ I (..\bsp\dji_motor.h)(0x664F3DD0)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B3488)
 F (..\bsp\dji_motor.h)(0x664F3DD0)()
 F (..\bsp\data_scope.c)(0x664F3DD0)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\data_scope.o --omf_browse dart_launcher_mount\data_scope.crf --depend dart_launcher_mount\data_scope.d)
-I (..\bsp\data_scope.h)(0x664F3DD0)
+I (..\bsp\data_scope.h)(0x67ED3DFD)
 I (../Core/Inc/usart.h)(0x67E14D6F)
 I (../Core/Inc/main.h)(0x67E7A1C2)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x67CA5C46)
@@ -1304,10 +1304,10 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x67CA5C09
 I (../bsp/bsp_can.h)(0x664F3DD0)
 I (../Core/Inc/can.h)(0x67E14D6E)
 I (../Core/Inc/main.h)(0x67E7A1C2)
-I (../task/shoot_task.h)(0x67E92F18)
-I (../task/gimbal_task.h)(0x67EA861F)
+I (../task/shoot_task.h)(0x67ECE4DB)
+I (../task/gimbal_task.h)(0x67ED8274)
 I (../task/modeswitch_task.h)(0x67E8E8F2)
-I (../task/reload_task.h)(0x67EA84B9)
+I (../task/reload_task.h)(0x67ED8C82)
 F (..\comm\can_comm.h)(0x67E8E4C6)()
 F (..\comm\micro_swicth.c)(0x67E930BC)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\micro_swicth.o --omf_browse dart_launcher_mount\micro_swicth.crf --depend dart_launcher_mount\micro_swicth.d)
 I (..\comm\micro_swicth.h)(0x67E8E98B)
@@ -1345,8 +1345,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x67CA5C46)
 I (../Core/Inc/main.h)(0x67E7A1C2)
 I (../bsp/bsp_remote_ET08.h)(0x67E93440)
 F (..\comm\micro_swicth.h)(0x67E8E98B)()
-F (..\task\shoot_task.c)(0x67EAB224)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\shoot_task.o --omf_browse dart_launcher_mount\shoot_task.crf --depend dart_launcher_mount\shoot_task.d)
-I (..\task\shoot_task.h)(0x67E92F18)
+F (..\task\shoot_task.c)(0x67ED9304)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\shoot_task.o --omf_browse dart_launcher_mount\shoot_task.crf --depend dart_launcher_mount\shoot_task.d)
+I (..\task\shoot_task.h)(0x67ECE4DB)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x67CA5C46)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x67E14D70)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x67CA5C46)
@@ -1400,9 +1400,9 @@ I (../comm/micro_swicth.h)(0x67E8E98B)
 I (../comm/can_comm.h)(0x67E8E4C6)
 I (../bsp/dji_motor.h)(0x664F3DD0)
 I (..\task\modeswitch_task.h)(0x67E8E8F2)
-F (..\task\shoot_task.h)(0x67E92F18)()
-F (..\task\debug_task.c)(0x67E7EA40)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\debug_task.o --omf_browse dart_launcher_mount\debug_task.crf --depend dart_launcher_mount\debug_task.d)
-I (..\task\debug_task.h)(0x67E4CA9B)
+F (..\task\shoot_task.h)(0x67ECE4DB)()
+F (..\task\debug_task.c)(0x67ED8F10)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\debug_task.o --omf_browse dart_launcher_mount\debug_task.crf --depend dart_launcher_mount\debug_task.d)
+I (..\task\debug_task.h)(0x67ED3F29)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x67CA5C46)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x67E14D70)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x67CA5C46)
@@ -1448,19 +1448,19 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x67CA5C09)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x67CA5C09)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x67CA5C09)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x67CA5C09)
-I (../bsp/data_scope.h)(0x664F3DD0)
+I (../bsp/data_scope.h)(0x67ED3DFD)
 I (../Core/Inc/usart.h)(0x67E14D6F)
 I (../Core/Inc/main.h)(0x67E7A1C2)
 I (../ToolChain-Math/pid.h)(0x66A893C6)
 I (../comm/can_comm.h)(0x67E8E4C6)
 I (../bsp/dji_motor.h)(0x664F3DD0)
-I (..\task\shoot_task.h)(0x67E92F18)
-I (..\task\gimbal_task.h)(0x67EA861F)
+I (..\task\shoot_task.h)(0x67ECE4DB)
+I (..\task\gimbal_task.h)(0x67ED8274)
 I (..\task\modeswitch_task.h)(0x67E8E8F2)
-I (..\task\reload_task.h)(0x67EA84B9)
-F (..\task\debug_task.h)(0x67E4CA9B)()
-F (..\task\reload_task.c)(0x67EAB2A9)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\reload_task.o --omf_browse dart_launcher_mount\reload_task.crf --depend dart_launcher_mount\reload_task.d)
-I (..\task\reload_task.h)(0x67EA84B9)
+I (..\task\reload_task.h)(0x67ED8C82)
+F (..\task\debug_task.h)(0x67ED3F29)()
+F (..\task\reload_task.c)(0x67ED9304)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\reload_task.o --omf_browse dart_launcher_mount\reload_task.crf --depend dart_launcher_mount\reload_task.d)
+I (..\task\reload_task.h)(0x67ED8C82)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x67CA5C46)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x67E14D70)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x67CA5C46)
@@ -1508,67 +1508,73 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x67CA5C09)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x67CA5C09)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x67CA5C09)
 I (../Core/Inc/main.h)(0x67E7A1C2)
-I (../ToolChain-Math/pid.h)(0x66A893C6)
-I (../comm/can_comm.h)(0x67E8E4C6)
-I (../bsp/dji_motor.h)(0x664F3DD0)
-I (../comm/micro_swicth.h)(0x67E8E98B)
-F (..\task\reload_task.h)(0x67EA84B9)()
-F (..\task\gimbal_task.c)(0x67EA84D9)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\gimbal_task.o --omf_browse dart_launcher_mount\gimbal_task.crf --depend dart_launcher_mount\gimbal_task.d)
-I (..\task\gimbal_task.h)(0x67EA861F)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x67CA5C46)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x67E14D70)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x67CA5C46)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x67CA5C46)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x67CA5C46)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x67CA5C08)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B3488)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x67CA5C08)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x67CA5C08)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x67CA5C08)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x67CA5C08)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x67CA5C46)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B3488)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x67CA5C46)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x67CA5C46)
-I (..\task\modeswitch_task.h)(0x67E8E8F2)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x67CA5C09)
-I (../Core/Inc/FreeRTOSConfig.h)(0x67E3E779)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x67CA5C09)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x67CA5C09)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h)(0x67CA5C09)
-I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h)(0x67CA5C0A)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x67CA5C09)
-I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x67CA5C09)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x67CA5C09)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x67CA5C09)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x67CA5C09)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x67CA5C09)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x67CA5C09)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x67CA5C09)
-I (../Core/Inc/main.h)(0x67E7A1C2)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9B348A)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5D9B3482)
 I (../ToolChain-Math/pid.h)(0x66A893C6)
 I (../bsp/bsp_remote_ET08.h)(0x67E93440)
 I (../comm/can_comm.h)(0x67E8E4C6)
 I (../bsp/dji_motor.h)(0x664F3DD0)
 I (../comm/micro_swicth.h)(0x67E8E98B)
-F (..\task\gimbal_task.h)(0x67EA861F)()
-F (..\task\modeswitch_task.c)(0x67EA8661)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\modeswitch_task.o --omf_browse dart_launcher_mount\modeswitch_task.crf --depend dart_launcher_mount\modeswitch_task.d)
+F (..\task\reload_task.h)(0x67ED8C82)()
+F (..\task\gimbal_task.c)(0x67ED8EDA)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\gimbal_task.o --omf_browse dart_launcher_mount\gimbal_task.crf --depend dart_launcher_mount\gimbal_task.d)
+I (..\task\gimbal_task.h)(0x67ED8274)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x67CA5C46)
+I (../Core/Inc/stm32f4xx_hal_conf.h)(0x67E14D70)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x67CA5C46)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x67CA5C46)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x67CA5C46)
+I (../Drivers/CMSIS/Include/core_cm4.h)(0x67CA5C08)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B3488)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x67CA5C08)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x67CA5C08)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x67CA5C08)
+I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x67CA5C08)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x67CA5C46)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B3488)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x67CA5C46)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x67CA5C46)
+I (..\task\modeswitch_task.h)(0x67E8E8F2)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x67CA5C09)
+I (../Core/Inc/FreeRTOSConfig.h)(0x67E3E779)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h)(0x67CA5C0A)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x67CA5C09)
+I (../Core/Inc/main.h)(0x67E7A1C2)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9B348A)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5D9B3482)
+I (../ToolChain-Math/pid.h)(0x66A893C6)
+I (../bsp/bsp_remote_ET08.h)(0x67E93440)
+I (../ToolChain-Math/math_calcu.h)(0x66A658F6)
+I (../comm/can_comm.h)(0x67E8E4C6)
+I (../bsp/dji_motor.h)(0x664F3DD0)
+I (../comm/micro_swicth.h)(0x67E8E98B)
+F (..\task\gimbal_task.h)(0x67ED8274)()
+F (..\task\modeswitch_task.c)(0x67ED9178)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\modeswitch_task.o --omf_browse dart_launcher_mount\modeswitch_task.crf --depend dart_launcher_mount\modeswitch_task.d)
 I (..\task\modeswitch_task.h)(0x67E8E8F2)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x67CA5C09)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B3488)
@@ -1619,9 +1625,29 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x67CA5C46)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9B348A)
 I (../bsp/bsp_remote_ET08.h)(0x67E93440)
 I (../comm/micro_swicth.h)(0x67E8E98B)
-I (..\task\shoot_task.h)(0x67E92F18)
-I (..\task\gimbal_task.h)(0x67EA861F)
+I (..\task\shoot_task.h)(0x67ECE4DB)
+I (..\task\gimbal_task.h)(0x67ED8274)
 F (..\task\modeswitch_task.h)(0x67E8E8F2)()
 F (..\ToolChain-Math\pid.c)(0x66B027CC)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\pid.o --omf_browse dart_launcher_mount\pid.crf --depend dart_launcher_mount\pid.d)
 I (..\ToolChain-Math\pid.h)(0x66A893C6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B3488)
+F (..\ToolChain-Math\math_calcu.c)(0x66A658F6)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../bsp -I ../math/Include -I ../comm -I ../ToolChain-Math -I ../task-I.\RTE\_dart_launcher_mount-IC:\Users\tjh22\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\tjh22\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o dart_launcher_mount\math_calcu.o --omf_browse dart_launcher_mount\math_calcu.crf --depend dart_launcher_mount\math_calcu.d)
+I (..\ToolChain-Math\math_calcu.h)(0x66A658F6)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B3488)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B3488)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5D9B3482)
+I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x67CA5C09)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B3488)
+I (../Core/Inc/FreeRTOSConfig.h)(0x67E3E779)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h)(0x67CA5C0A)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x67CA5C09)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x67CA5C09)

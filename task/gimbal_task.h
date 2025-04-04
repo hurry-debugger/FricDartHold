@@ -9,7 +9,11 @@
 #define MG6020_MAX_ECD 		8191	
 #define MG6020_MAX_SPEED 	350	
 
-#define GIMBAL_MAX_SPEED    8192*50  //50rpm
+#define GIMBAL_MAX_RIGHT   -213000
+
+#define VISION_SPEED_LIMIT  300
+
+#define GIMBAL_MAX_SPEED    8192*8  
 
 typedef enum{
 	GIMBAL_PROTECT_MODE,
@@ -25,6 +29,8 @@ typedef struct {
 	
 	float pos_fbd;
 	float pos_ref;
+	
+	float start_ecd;
 	
 	int16_t current;
 	

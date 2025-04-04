@@ -18,7 +18,7 @@
 #include "shoot_task.h"
 #include "gimbal_task.h"
 
-ctrl_mode_e ctrl_mode;
+ctrl_mode_e ctrl_mode = PROTECT_MODE;
 lock_flag_e lock_flag = LOCK;
 
 uint8_t last_vision_flag;
@@ -36,7 +36,7 @@ void ModeSwitch_Task(void const *argu)
 		//内八解锁
 		if(lock_flag == LOCK)
 		{
-		 unlock_init();
+			 unlock_init();
 		}
 		else if(lock_flag == UNLOCK)
 		{                           
@@ -66,7 +66,8 @@ static void unlock_init(void)
 //左拨杆模式切换
 static void sw1_mode_handler(void)  
 {
-	last_vision_flag = ctrl_mode;
+//	last_vision_flag = ctrl_mode;
+	taskENTER_CRITICAL();
 	switch( SBUS.SB )
 	{
 		case SW_UP:                     //上，遥控模式
@@ -81,45 +82,14 @@ static void sw1_mode_handler(void)
 		}
 		case SW_DN:                     //下，键鼠模式
 		{
-			ctrl_mode = KEYBOARD_MODE;
+			ctrl_mode = VISION_MODE;
 			break;
 		}
 	}
+//				等待电机初始化											保护优先级最高			等待回正
+	if ((gimbal_zero == NOFOUND || reload_zero == NOFOUND) && ctrl_mode != PROTECT_MODE &&(SBUS.Ch3 < 600 && SBUS.Ch4  < 600))
+		ctrl_mode = INIT_MODE;
 	
-	if ( gimbal_zero == NOFOUND || reload_zero == NOFOUND)
-		ctrl_mode =INIT_MODE;
-	
-  	if((last_vision_flag == VISION_MODE)&&(ctrl_mode != VISION_MODE))
-	{	
-		vision_flag = 1;
-	}
+	taskEXIT_CRITICAL();
 }
 
-////右拨杆模式切换
-//static void sw2_mode_handler(void)	
-//{
-//    if( gimbal.mode == REMOTE_MODE )
-//    {
-//      switch( SBUS.Ch7)
-//      {
-//				case SW_UP:                     //上，摩擦轮停止
-//				{
-//					shoot.mode = SHOOT_STOP_MODE;
-//					shoot.fire_mode = SINGLE_MODE;
-//					break;
-//				}
-//				case SW_MI:                     //中，单发模式
-//				{
-//					shoot.mode = SHOOT_FIRE_MODE;
-//					shoot.fire_mode = SINGLE_MODE;
-//					break;
-//				}
-//				case SW_DN:                     //下，连发模式
-//				{
-//					shoot.mode = SHOOT_FIRE_MODE;
-//					shoot.fire_mode = SERIES_MODE;
-//					break;
-//				}
-//      }
-//    }
-//}
