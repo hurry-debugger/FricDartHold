@@ -283,3 +283,11 @@ static void Shoot_Status_Init(void)
 	shoot_fsm.shoot_status_handler = shoot_lock_handler;
 }
 
+
+static uint16_t shoot_interval_cnt;//每发镖的间隔时间，20s内打完
+static uint16_t wait_gate_cnt;//闸门完全开启需要7s，需等待裁判系统开启的标志位，judge_flag;
+
+void Shoot_Tick(void)
+{
+	shoot_interval_cnt ++;
+}

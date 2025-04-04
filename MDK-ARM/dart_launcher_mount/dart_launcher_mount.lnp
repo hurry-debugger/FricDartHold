@@ -43,6 +43,8 @@
 "dart_launcher_mount\dji_motor.o"
 "dart_launcher_mount\data_scope.o"
 "dart_launcher_mount\bsp_remote_et08.o"
+"dart_launcher_mount\bsp_judge.o"
+"dart_launcher_mount\us_tim.o"
 "dart_launcher_mount\can_comm.o"
 "dart_launcher_mount\micro_swicth.o"
 "dart_launcher_mount\shoot_task.o"

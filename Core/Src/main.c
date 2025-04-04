@@ -30,7 +30,7 @@
 #include "can_comm.h"
 #include "bsp_usart.h"
 #include "micro_swicth.h"
-
+#include "us_tim.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -194,8 +194,11 @@ void SystemClock_Config(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
-	if (htim->Instance == TIM3)
+	if (htim->Instance == TIM3)//1ms¶¨Ê±Æ÷
+	{
 		MicroSwicth_Callback();
+	
+	}
   /* USER CODE END Callback 0 */
   if (htim->Instance == TIM2)
   {

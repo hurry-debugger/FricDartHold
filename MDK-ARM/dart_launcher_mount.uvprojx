@@ -649,6 +649,26 @@
               <FileType>5</FileType>
               <FilePath>..\bsp\bsp_remote_ET08.h</FilePath>
             </File>
+            <File>
+              <FileName>bsp_judge.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\bsp\bsp_judge.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_judge.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\bsp\bsp_judge.h</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\bsp\bsp_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_flash.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\bsp\bsp_flash.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -685,19 +705,9 @@
               <FilePath>..\task\shoot_task.c</FilePath>
             </File>
             <File>
-              <FileName>shoot_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\task\shoot_task.h</FilePath>
-            </File>
-            <File>
               <FileName>debug_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\task\debug_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>debug_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\task\debug_task.h</FilePath>
             </File>
             <File>
               <FileName>reload_task.c</FileName>
@@ -705,19 +715,9 @@
               <FilePath>..\task\reload_task.c</FilePath>
             </File>
             <File>
-              <FileName>reload_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\task\reload_task.h</FilePath>
-            </File>
-            <File>
               <FileName>gimbal_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\task\gimbal_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>gimbal_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\task\gimbal_task.h</FilePath>
             </File>
             <File>
               <FileName>modeswitch_task.c</FileName>
@@ -725,9 +725,14 @@
               <FilePath>..\task\modeswitch_task.c</FilePath>
             </File>
             <File>
-              <FileName>modeswitch_task.h</FileName>
+              <FileName>serial_screen_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\task\serial_screen_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>serial_screen_task.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\task\modeswitch_task.h</FilePath>
+              <FilePath>..\task\serial_screen_task.h</FilePath>
             </File>
           </Files>
         </Group>

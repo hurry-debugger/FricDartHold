@@ -36,7 +36,7 @@ uint16_t Robot_Self_HP;//自身血量
   * @retval 是否对正误判断做处理
   * @attention  在此判断帧头和CRC校验,无误再写入数据，不重复判断帧头
   */
-int Judge_Read_Data(uint8_t *ReadFromUsart)
+int Judge_Read_Data(uint8_t *ReadFromUsart) 
 {
 	uint8_t  retval_tf = FALSE; //数据真实性标志位,每次读取时都默认为FALSE
 	uint16_t judge_length;			//数据字节长度
@@ -78,7 +78,7 @@ int Judge_Read_Data(uint8_t *ReadFromUsart)
 						memcpy(&RobotHP, (ReadFromUsart + DATA), LEN_robot_HP);
 					break;
 					
-					case ID_darts_status:		//0x0004
+					case ID_darts_status:		//0x0105
 						memcpy(&Dart_Status, (ReadFromUsart + DATA), LEN_darts_status);
 					break;
 					
