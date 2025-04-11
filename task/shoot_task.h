@@ -56,5 +56,4 @@ typedef struct{
 extern shoot_t shoot;
 void Shoot_Task(void const *argu);
 
-
 #endif

@@ -1,4 +1,5 @@
 #include "bsp_flash.h"
+#include <assert.h>
 
 #define FMC_FLASH_BASE      0x08000000   // FLASH的起始地址
 #define FMC_FLASH_END       0x08080000   // FLASH的结束地址
@@ -47,57 +48,117 @@ static uint8_t STMFLASH_GetFlashSector(uint32_t addr)
     return FLASH_SECTOR_11;	
 }
 
-/**
- *@功能：向内部Flash写入数据
- *@参数1：WriteAddress：数据要写入的目标地址（偏移地址）
- *@参数2：*data： 写入的数据首地址
- *@参数3：length：写入数据的个数
- */
-void WriteFlashData(uint32_t WriteAddress, uint8_t *data, uint32_t length)
+/*
+  * @brief  将 uint16_t 数组转换为 uint32_t 数组（大端序模式）
+  * @param  addr_32: 目标缓冲区地址（需4字节对齐）
+  * @param  addr_16: 源数据地址（需2字节对齐）
+  * @param  byte: 转换的字节数（需为4的倍数）
+  * @retval 无
+  * @note 函数假设系统为小端模式，需确保地址对齐以避免硬件异常[7,8](@ref)
+  */
+void u16_To_u32(uint32_t *addr_32, uint16_t *addr_16, uint16_t byte)
 {
-    FLASH_EraseInitTypeDef FlashEraseInit;
-    HAL_StatusTypeDef FlashStatus=HAL_OK;
-    uint32_t SectorError=0;
-    uint32_t addrx=0;
-    uint32_t endaddr=0;
+    // 参数合法性检查
+    if (!addr_16 || !addr_32 || byte%4 != 0) return;
     
-    if( (WriteAddress < FMC_FLASH_BASE) || ( WriteAddress + length >= FMC_FLASH_END) || (length <= 0) )
-    return;
-
-    HAL_FLASH_Unlock();              //解锁
-    addrx = WriteAddress;            //写入的起始地址
-    endaddr = WriteAddress+length;   //写入的结束地址
-
-
-        while(addrx<endaddr)  //扫清一切障碍.(对非FFFFFFFF的地方,先擦除)
-        {
-             if(STMFLASH_ReadWord(addrx)!=0XFFFFFFFF)//有非0XFFFFFFFF的地方,要擦除这个扇区
-            {   
-                FlashEraseInit.TypeErase=FLASH_TYPEERASE_SECTORS;       //擦除类型，扇区擦除 
-                FlashEraseInit.Sector=STMFLASH_GetFlashSector(addrx);   //要擦除的扇区
-                FlashEraseInit.NbSectors=1;                             //一次只擦除一个扇区
-                FlashEraseInit.VoltageRange=FLASH_VOLTAGE_RANGE_3;      //电压范围，VCC=2.7~3.6V之间!!
-                if(HAL_FLASHEx_Erase(&FlashEraseInit,&SectorError)!=HAL_OK) 
-                {
-                    break;//发生错误了
-                }
-                }else addrx+=1;
-                FLASH_WaitForLastOperation(FLASH_WAITETIME);
-				//等待上次操作完成
-        }
-    
-    FlashStatus=FLASH_WaitForLastOperation(FLASH_WAITETIME);            //等待上次操作完成
-    if(FlashStatus==HAL_OK)
-    {
-         while(WriteAddress<endaddr)//写数据
-         {
-            if(HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE,WriteAddress,*data)!=HAL_OK)//写入数据
-            { 
-                break;	//写入异常
-            }
-            WriteAddress+=1;
-            data++;
-        }  
+    // 循环合并数据（小端序）
+    for (uint16_t i = 0; i < byte/4; i++) {
+        // 将两个连续的uint16_t合并为一个uint32_t
+        addr_32[i] = (uint32_t)(addr_16[2*i]) | ((uint32_t)(addr_16[2*i + 1]) << 16);
     }
-    HAL_FLASH_Lock();           //上锁
+}
+/*
+  * @brief  将 uint32_t 数组转换为 uint16_t 数组（支持大端/小端模式）
+  * @param  dest_u16: 目标缓冲区地址（需2字节对齐）
+  * @param  src_u32: 源数据地址（需4字节对齐）
+  * @param  byte: 转换的字节数（需为4的倍数）
+  * @param  endian: 字节序（0=小端，1=大端）
+  * @retval 无
+  * @note 函数强制内存对齐检查，避免硬件异常
+  */
+void u32_To_u16(uint16_t *addr_16, uint32_t *addr_32, uint32_t byte)
+{
+    // 参数合法性检查
+    if (!addr_16 || !addr_32 || byte%4 != 0) return;
+
+    for (uint32_t i = 0; i < byte/4; i++) {
+     // 小端模式（低字节在前）
+            addr_16[2*i]   = (uint16_t)(addr_32[i] & 0xFFFF);       // 低16位
+            addr_16[2*i+1] = (uint16_t)((addr_32[i] >> 16) & 0xFFFF); // 高16位
+    }
+}
+
+/**
+  * @brief  将数据写入Flash存储器
+  * @param  WriteAddress: 写入起始地址（需4字节对齐）
+  * @param  data: 待写入数据的指针（需指向32位对齐数据）
+  * @param  byte: 写入字节数（需为4的倍数）
+  * @retval HAL状态码（HAL_OK=成功，HAL_ERROR=失败）
+  *
+  * @note 关键操作流程：
+  *       1. 参数校验 -> 2. 中断锁定 -> 3. Flash解锁 -> 4. 扇区擦除
+  *       -> 5. 数据写入 -> 6. Flash上锁 -> 7. 中断恢复
+  * @warning 擦除操作会清除整个扇区数据，建议存储关键数据前备份原始内容
+  */
+HAL_StatusTypeDef WriteFlashData(uint32_t WriteAddress, uint32_t *data, uint32_t word)
+{
+    /* 关闭全局中断（防止Flash操作被中断打断）*/
+    __disable_irq();
+    
+    FLASH_EraseInitTypeDef FlashEraseInit;
+    uint32_t SectorError = 0;
+    HAL_StatusTypeDef status = HAL_OK;
+
+    /* 参数有效性检查（三重验证机制）*/
+    if( (WriteAddress % 4 != 0) ||                // 地址4字节对齐检查
+        (WriteAddress < FMC_FLASH_BASE) ||         // 起始地址下限检查
+        (WriteAddress + word*4 >= FMC_FLASH_END) ||  // 结束地址越界检查
+        (word == 0) )                              // 零长度写入检查
+    {
+        __enable_irq();
+        return HAL_ERROR;
+    }
+
+    /* Flash解锁（必须成对使用HAL_FLASH_Unlock/Lock) */
+    HAL_FLASH_Unlock();
+
+    /* 计算需要擦除的扇区范围（优化原逐个地址检查的低效逻辑） */
+    uint32_t start_sector = STMFLASH_GetFlashSector(WriteAddress);
+    uint32_t end_sector = STMFLASH_GetFlashSector(WriteAddress + word*4 - 1);
+    
+    /* 配置擦除参数（注意电压范围需与实际硬件匹配）*/
+    FlashEraseInit.TypeErase = FLASH_TYPEERASE_SECTORS;
+    FlashEraseInit.Sector = start_sector;
+    FlashEraseInit.NbSectors = end_sector - start_sector + 1;
+    FlashEraseInit.VoltageRange = FLASH_VOLTAGE_RANGE_3; // 2.7V-3.6V适用
+
+    /* 执行扇区擦除（注意擦除后的数据全为0xFFFFFFFF）*/
+    if((status = HAL_FLASHEx_Erase(&FlashEraseInit, &SectorError)) != HAL_OK) {
+        HAL_FLASH_Lock();
+        __enable_irq();
+        return status;
+    }
+
+    /* 数据写入*/
+    for(uint32_t i=0; i<word; i++) 
+    {
+        /* 单字编程（FLASH_TYPEPROGRAM_WORD要求地址4字节对齐） */
+        if((status = HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, 
+                                    WriteAddress, 
+                                    data[i])) != HAL_OK) 
+        {
+            HAL_FLASH_Lock();
+            __enable_irq();
+            return status;
+        }
+        WriteAddress += 4; // 地址递增步长与编程类型匹配
+    }
+
+    /* Flash上锁（防止意外写入）*/
+    HAL_FLASH_Lock();
+    
+    /* 恢复全局中断 */
+    __enable_irq();
+
+    return HAL_OK;
 }

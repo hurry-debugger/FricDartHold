@@ -33,8 +33,10 @@ static void Reload_Motor_Init(void);
 static void Reload_Control(void);
 static void Reload_Data_Update(void);
 static void Reload_Current_Set(void);
+
 static void Relaod_Found_Zero(void);
 static void Reload_Reinit(void);
+static void Reload_Serial(void);
 
 static void reload_mode_sw(reload_fsm_t *reload_fsm); 
 static void reload_status_transition(reload_fsm_t *reload_fsm);
@@ -71,9 +73,27 @@ static void Reload_Pid_Cal(void)
 	reload.current = PID_Calculate(&reload_spd_pid_t, reload.spd_fbd, reload.spd_ref);
 }
 
+static void Check_Dark_Num(void)
+{
+	if(abs(reload.now_ecd) >= 4 * ONE_DART_ECD)
+		dart_num = 4;
+	else if(abs(reload.now_ecd) >= 3 * ONE_DART_ECD)
+		dart_num = 3;
+	else if(abs(reload.now_ecd) >= 2 * ONE_DART_ECD)
+		dart_num = 2;
+	else if(abs(reload.now_ecd) >= 1 * ONE_DART_ECD)
+		dart_num = 1;
+	else if(abs(reload.now_ecd) < reload.start_ecd+60000)
+		dart_num = 0;
+}
+
+uint8_t reload_tick_start;
+uint8_t reload_lanuch_flag;
+
 static void Reload_Control(void)
 {
 	Reload_Data_Update();
+	Check_Dark_Num();
 	switch (reload.reload_mode)
 	{
 		case RELOAD_PROTECT_MODE:
@@ -87,31 +107,20 @@ static void Reload_Control(void)
 		}	break;
 		case RELOAD_SINGLE_MODE:
 		{
-			fric_run_flag = 1;
-			reload.spd_ref = RELOAD_SPEED;
-			if(abs(reload.now_ecd) >= 4 * ONE_DART_ECD)
+			if(dart_num == 4)
 			{
 				fric_run_flag = 0;
-				dart_num = 4;
 				reload.spd_ref = 0;
+			}else{
+				fric_run_flag = 1;
+				reload.spd_ref = RELOAD_SPEED;
 			}
 			
 			Reload_Pid_Cal();
 		}	break;
 		case RELOAD_SERIES_MODE:
 		{
-			fric_run_flag = 1;
-			reload.spd_ref = RELOAD_SPEED;
-			if(abs(reload.now_ecd) >= (dart_num+1) * ONE_DART_ECD)			
-			{
-				if (dart_num++ >= 4)
-				{
-					fric_run_flag = 0;
-					reload.spd_ref = 0;
-				}
-			}
-						
-			Reload_Pid_Cal();
+			Reload_Serial();
 		}	break;
 		case RELOAD_REINIT_MODE:
 		{
@@ -125,6 +134,70 @@ static void Reload_Control(void)
 	Reload_Current_Set();
 }
 
+uint8_t flag;
+
+static void Reload_Serial(void)
+{
+	switch (dart_num)
+	{
+		case 0:
+		case 2://每次开闸门的第一发镖
+		{
+			if(flag)
+			{
+				fric_run_flag = 1;
+				reload_lanuch_flag = 0;
+				reload.spd_ref = RELOAD_SPEED;			
+			}else
+			{
+				reload.spd_ref = 0;
+				fric_run_flag = 0;
+			}
+		}	break;
+		case 1:
+		case 3://每次开闸门的第二发镖
+		{
+			flag = 0;
+			reload.spd_ref = 0;
+			reload_tick_start = 1;
+
+			if(reload_lanuch_flag)
+			{
+				fric_run_flag = 1;
+				reload.spd_ref = RELOAD_SPEED;
+			}else{
+				reload.spd_ref = 0;
+				fric_run_flag = 0;
+			}
+		}	break;
+		case 4:
+		{
+			reload_lanuch_flag = 0;
+			fric_run_flag = 0;
+			reload.spd_ref = 0;
+		}	break;
+		default:
+			break;
+	}
+	Reload_Pid_Cal();
+}
+
+void Reload_Tick(void)//放入1ms定时器中
+{
+	static uint16_t reload_tick_cnt = 0;
+	
+	if (reload_tick_start)
+	{
+		if (reload_tick_cnt ++ >= 2000)//每隔两秒发一镖
+		{
+			reload_lanuch_flag = 1;
+			reload_tick_cnt = 0;
+			reload_tick_start = 0;
+		}
+	}
+}
+
+
 static void Reload_Reinit(void)
 {
 	fric_run_flag = 0;
@@ -132,27 +205,22 @@ static void Reload_Reinit(void)
 	{
 		case SW_UP:{//重装填一发
 			reload.spd_ref = -RELOAD_SPEED;
-			if(abs(reload.now_ecd) < 3 * ONE_DART_ECD)//小于第三发镖的位置
+			if(dart_num <= 3-1)//小于第三发镖的位置
 			{
-
 				reload.spd_ref = 0;
-				dart_num = 3;
-			}		
+			}
 			
 			Reload_Pid_Cal();
 		}
 			break;
 		case SW_DN:{//重装填四发
 			reload.spd_ref = -RELOAD_SPEED;
-			if(abs(reload.now_ecd) < 10000)		//回到零点，感觉偏差有点大，停不住
+			if(dart_num == 0)
 			{
 				reload.spd_ref = 0;
-				dart_num = 0;
-			}			
-					
-			
+			}
+				
 			Reload_Pid_Cal();
-
 		}
 			break;
 		default:
@@ -203,7 +271,7 @@ static void Reload_Motor_Init(void)
 	PID_Init(&reload_spd_pid_t, MG2006_MAX_CURRENT, 0, 0, \
 				3, 0.319999993, 1.79999995, \
 				500, 1000, \
-				0, 0, ChangingIntegralRate | Derivative_On_Measurement);	
+				0, 0, ChangingIntegralRate | Derivative_On_Measurement | ErrorHandle);	
 }
 
 static void reload_mode_sw(reload_fsm_t *fsm) //SC上保护中单发下连发
@@ -223,20 +291,22 @@ static void reload_mode_sw(reload_fsm_t *fsm) //SC上保护中单发下连发
         case RELOAD_REMOTE: 
 			switch(SBUS.SC)
 			{
-				case SW_UP:
-					Reload_Mode_Change(RELOAD_PROTECT_MODE);
-					break;
 				case SW_MI:
 					Reload_Mode_Change(RELOAD_SINGLE_MODE);
+					if(SBUS.SA == SW_UP)
+						Reload_Mode_Change(RELOAD_REINIT_MODE);
 					break;
 				case SW_DN:
 					Reload_Mode_Change(RELOAD_SERIES_MODE);
+					if(SBUS.SA == SW_UP)
+						Reload_Mode_Change(RELOAD_REINIT_MODE);
+					break;
+				case SW_UP:
+					Reload_Mode_Change(RELOAD_PROTECT_MODE);
 					break;
 				default:
 					break;
 			}
-			if(SBUS.SA == SW_UP)
-				Reload_Mode_Change(RELOAD_REINIT_MODE);
 			break;
         case RELOAD_AUTO: 
 				//自动

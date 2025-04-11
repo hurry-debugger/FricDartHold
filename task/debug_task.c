@@ -4,11 +4,14 @@
 
 #include "data_scope.h"
 #include "pid.h"
+#include "bsp_remote_ET08.h"
 
 #include "can_comm.h"
 #include "shoot_task.h"
 #include "gimbal_task.h"
 #include "reload_task.h"
+#include "micro_swicth.h"
+
 
 extern shoot_t shoot;
 extern gimbal_t gimbal;
@@ -25,10 +28,11 @@ typedef enum
 {
 	fric_motor,		//0
 	reload_motor,	//1
-	gimbal_motor	//2
+	gimbal_motor,	//2
+	debug_mode,
 }motor_type_e;
 
-motor_type_e motor_type = reload_motor;
+motor_type_e motor_type = fric_motor;
 
 void DataWavePkg(void)
 {
@@ -63,10 +67,6 @@ void DataWavePkg(void)
 			DataScope_Get_Channel_Data(4 * ONE_DART_ECD);
 			
 			DataScope_Get_Channel_Data(reload.current);
-			
-			DataScope_Get_Channel_Data(ctrl_mode);
-			DataScope_Get_Channel_Data(gimbal.gimbal_mode);
-			DataScope_Get_Channel_Data(reload.reload_mode);
 			break;
 		}
 		case gimbal_motor:
@@ -84,6 +84,18 @@ void DataWavePkg(void)
 			DataScope_Get_Channel_Data(gimbal_pos_pid_t.Pout);
 			break;
 		}
+		case debug_mode:
+		{
+			DataScope_Get_Channel_Data(gimbal_zero);
+			DataScope_Get_Channel_Data(reload_zero);
+			DataScope_Get_Channel_Data(SBUS.Ch3);
+			DataScope_Get_Channel_Data(SBUS.Ch4);
+			DataScope_Get_Channel_Data(ctrl_mode);
+			DataScope_Get_Channel_Data(gimbal.gimbal_mode);
+			DataScope_Get_Channel_Data(reload.reload_mode);
+		}
+		default:
+			break;
 
 	}
 }

@@ -61,7 +61,7 @@ static void Gimbal_Pid_Cal(void)
 	
 	gimbal.spd_ref = PID_Calculate(&gimbal_pos_pid_t, gimbal.pos_fbd, gimbal_ramp.out);	
 	
-	(gimbal.spd_ref>=0) ? OUTPUT_LIMIT(gimbal.spd_ref, VISION_SPEED_LIMIT, 0) : OUTPUT_LIMIT(gimbal.spd_ref, 0, -VISION_SPEED_LIMIT);
+	OUTPUT_LIMIT(gimbal.spd_ref, VISION_SPEED_LIMIT, -VISION_SPEED_LIMIT);
 	gimbal.current = PID_Calculate(&gimbal_spd_pid_t, gimbal.spd_fbd, gimbal.spd_ref);
 }
 
@@ -122,7 +122,7 @@ static void Gimbal_Found_Zero(void)
 {
 	if(gimbal_zero == NOFOUND)
 	{
-		gimbal.spd_ref = 800;
+		gimbal.spd_ref = 500;
 		gimbal.current = PID_Calculate(&gimbal_spd_pid_t, gimbal.spd_fbd, gimbal.spd_ref);
 	}
 	else if(gimbal_zero == FOUND)
@@ -149,11 +149,11 @@ static void Gimbal_Motor_Init(void)
 	PID_Init(&gimbal_pos_pid_t, MG6020_MAX_ECD/2, 20, 1, \
 				1.04999995, 0.0199999996, 0, \
 				100, 20, \
-				0, 0, ChangingIntegralRate);
+				0, 0, ChangingIntegralRate | ErrorHandle);
 	PID_Init(&gimbal_spd_pid_t, MG6020_MAX_CURRENT, 0, 0, \
 				40.2, 0, 0, \
 				0, 0, \
-				0, 0, Integral_Limit);
+				0, 0, Integral_Limit | ErrorHandle);
 
 }
 

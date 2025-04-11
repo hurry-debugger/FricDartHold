@@ -48,6 +48,8 @@ dart_launcher_mount\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/inclu
 dart_launcher_mount\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 dart_launcher_mount\freertos.o: ../comm/can_comm.h
 dart_launcher_mount\freertos.o: ../bsp/dji_motor.h
+dart_launcher_mount\freertos.o: ../bsp/bsp_serial_screen.h
+dart_launcher_mount\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 dart_launcher_mount\freertos.o: ../task/shoot_task.h
 dart_launcher_mount\freertos.o: ../task/reload_task.h
 dart_launcher_mount\freertos.o: ../task/modeswitch_task.h

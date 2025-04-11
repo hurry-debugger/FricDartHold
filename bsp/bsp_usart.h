@@ -10,11 +10,12 @@
 
 #define DMA_DBUS_LEN    25 
 #define DMA_JUDGE_LEN 	100
-#define DMA_SCREEN_LEN 	6
+#define DMA_SCREEN_LEN 	20
 
 void USER_UART_Init(void);
 void USER_UART_IRQHandler(UART_HandleTypeDef *huart);
 void USER_UART_IDLECallback(UART_HandleTypeDef *huart);
+void Uart_printf(UART_HandleTypeDef *huart,char *format, ...);
 
 #endif
 

@@ -32,7 +32,7 @@ void Can_Send_Task(void const *argu)
 			if(event.value.signals & RELAOD_MOTOR_MSG_SEND || \
 				event.value.signals & GIMBAL_MOTOR_MSG_SEND)//reload
 				can2_send_message(0x1FF, 0, motor_current.gimbal, motor_current.reload, 0);	
-			
+	
 //			if(event.value.signals & GIMBAL_MOTOR_MSG_SEND)//gimbal	
 //				can2_send_message(MG6020_CAN_TX_ID, motor.fric_current[R],motor.fric_current[L], 0, 0);	
 			taskEXIT_CRITICAL();

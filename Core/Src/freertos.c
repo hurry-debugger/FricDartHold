@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "can_comm.h"
+#include "bsp_serial_screen.h"
 
 #include "shoot_task.h"
 #include "reload_task.h"
@@ -65,6 +66,9 @@ osThreadId shoot_task_handle;
 osThreadId reload_task_handle;
 osThreadId giambal_task_handle;
 osThreadId modeswitch_task_handle;
+
+osThreadId serial_screen_task_handle;
+
 
 osThreadId debug_task_handle;
 /* USER CODE END FunctionPrototypes */
@@ -154,9 +158,14 @@ void MX_FREERTOS_Init(void) {
 	osThreadDef(reloadTask, Reload_Task, osPriorityAboveNormal, 0, 256);
 	giambal_task_handle = osThreadCreate(osThread(reloadTask), NULL);
 	
-/**************************osPriorityAboveNormal Priority****************************/
+/**************************osPriorityNormal Priority****************************/
 	osThreadDef(modeswitchTask, ModeSwitch_Task, osPriorityNormal, 0, 256);
 	modeswitch_task_handle = osThreadCreate(osThread(modeswitchTask), NULL);
+	
+/**************************osPriorityBelowNormal Priority****************************/
+
+	osThreadDef(serialscreenTask, Serial_Screen_Task, osPriorityBelowNormal, 0, 256);
+	serial_screen_task_handle = osThreadCreate(osThread(serialscreenTask), NULL);
 
 /**************************Low Priority****************************/
 	osThreadDef(debugTask, Debug_Task, osPriorityLow, 0, 500);

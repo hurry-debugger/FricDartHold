@@ -54,7 +54,7 @@ typedef enum
 	ID_event_data			=		0x0101,		//场地事件数据		事件改变后发送
 	ID_supply_action	=		0x0102,		//补给站动作标识	动作发生后发送
 	ID_judge_warning	=		0x0104,		//裁判警告数据		警告发生后发送
-	ID_dart_info        =		0x0105,			//飞镖相关数据	1Hz
+	ID_dart_info        =		0x0fff,			//飞镖相关数据	1Hz
 	
 	ID_robot_status		=		0x0201,		//机器人状态数据	10Hz
 	ID_robot_power		=		0x0202,		//实时功率热量		50Hz

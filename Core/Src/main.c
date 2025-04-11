@@ -30,7 +30,7 @@
 #include "can_comm.h"
 #include "bsp_usart.h"
 #include "micro_swicth.h"
-#include "us_tim.h"
+#include "reload_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -112,7 +112,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	Can_Device_Init();
 	USER_UART_Init();
+	
 	HAL_TIM_Base_Start_IT(&htim3);
+	
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in cmsis_os2.c) */
@@ -130,6 +132,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  
   }
   /* USER CODE END 3 */
 }
@@ -193,16 +196,20 @@ void SystemClock_Config(void)
   */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
+
   /* USER CODE BEGIN Callback 0 */
 	if (htim->Instance == TIM3)//1ms¶¨Ê±Æ÷
 	{
 		MicroSwicth_Callback();
-	
+		
+		Reload_Tick();
 	}
   /* USER CODE END Callback 0 */
   if (htim->Instance == TIM2)
   {
     HAL_IncTick();
+	 
+	  
   }
   /* USER CODE BEGIN Callback 1 */
 

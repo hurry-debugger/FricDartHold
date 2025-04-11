@@ -650,16 +650,6 @@
               <FilePath>..\bsp\bsp_remote_ET08.h</FilePath>
             </File>
             <File>
-              <FileName>bsp_judge.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\bsp\bsp_judge.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_judge.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\bsp\bsp_judge.h</FilePath>
-            </File>
-            <File>
               <FileName>bsp_flash.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\bsp\bsp_flash.c</FilePath>
@@ -668,6 +658,16 @@
               <FileName>bsp_flash.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\bsp\bsp_flash.h</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_serial_screen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\bsp\bsp_serial_screen.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_serial_screen.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\bsp\bsp_serial_screen.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -725,14 +725,24 @@
               <FilePath>..\task\modeswitch_task.c</FilePath>
             </File>
             <File>
-              <FileName>serial_screen_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\task\serial_screen_task.c</FilePath>
+              <FileName>gimbal_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\task\gimbal_task.h</FilePath>
             </File>
             <File>
-              <FileName>serial_screen_task.h</FileName>
+              <FileName>modeswitch_task.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\task\serial_screen_task.h</FilePath>
+              <FilePath>..\task\modeswitch_task.h</FilePath>
+            </File>
+            <File>
+              <FileName>reload_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\task\reload_task.h</FilePath>
+            </File>
+            <File>
+              <FileName>shoot_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\task\shoot_task.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -748,6 +758,16 @@
               <FileName>math_calcu.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\ToolChain-Math\math_calcu.c</FilePath>
+            </File>
+            <File>
+              <FileName>crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ToolChain-Math\crc.c</FilePath>
+            </File>
+            <File>
+              <FileName>crc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ToolChain-Math\crc.h</FilePath>
             </File>
           </Files>
         </Group>

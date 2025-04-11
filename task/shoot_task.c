@@ -7,15 +7,21 @@
 
 #include "bsp_remote_ET08.h"
 #include "micro_swicth.h"
+#include "bsp_serial_screen.h"
 
 #include "can_comm.h"
 #include "modeswitch_task.h"
+#include "math_calcu.h"
+
+
+#include "ADRC_TOC_NLADRC.h"
 
 
 PID_TypeDef fric_motor_pid_t[2];
 
 extern osThreadId can_send_task_handle;
 extern uint8_t fric_run_flag;
+extern uint8_t dart_num;
 
 shoot_t shoot;
 shoot_fsm_t shoot_fsm;
@@ -36,16 +42,22 @@ static void shoot_init_handler(void);
 
 void FricMotor_Mode_Change(shoot_mode_e shoot_mode);
 
+uint8_t protect_flag=0;
+
 void Shoot_Task(void const *argu)
 {
 	uint32_t mode_wake_time = osKernelSysTick();
 	Shoot_Motor_Init();
 	while (1)
 	{
-		shoot_mode_sw(&shoot_fsm);
-		Shoot_Control();
 		Shoot_data_update();
+		
+		shoot_mode_sw(&shoot_fsm);
+		
+		Shoot_Control();
+		
 		osSignalSet(can_send_task_handle, SHOOT_MOTOR_MSG_SEND);
+		
 		osDelayUntil(&mode_wake_time, SHOOT_PERIOD);
 	}
 }
@@ -62,47 +74,41 @@ static void Shoot_PID_calu(void)
 	shoot.fric_current[L] = PID_Calculate(&fric_motor_pid_t[L], shoot.fric_spd_fbd[L], shoot.fric_spd_ref[L]);
 }
 
-int32_t r = 6000,l = -6000;
-
 static void Shoot_Control(void)
 {
 	switch (shoot.shoot_mode)
 	{
 		case SHOOT_PROTECT_MODE:
 		{
-			shoot.fric_spd_ref[R] = 0;
-			shoot.fric_spd_ref[L] = 0;
+			shoot.fric_current[L] = 0;
+			shoot.fric_current[R] = 0;
 		}break;
 		case SHOOT_SINGLE_MODE:
 		{
-			shoot.fric_spd_ref[R] = r;
-			shoot.fric_spd_ref[L] = l;
-			if (!fric_run_flag)
+			if (dart_num <= 2)
 			{
-				shoot.fric_spd_ref[R] = 0;
-				shoot.fric_spd_ref[L] = 0;
+				shoot.fric_current[L] = 0;
+				shoot.fric_current[R] = 0;
+			}else{
+				shoot.fric_spd_ref[R] = serial_fric_vel[dart_num];
+				shoot.fric_spd_ref[L] = -serial_fric_vel[dart_num];		
+				Shoot_PID_calu();
 			}
-				
-//			swtich(dart_num)
-//			shoot.fric_spd_ref[R] = flash内部数据(dart_num)
-//			shoot.fric_spd_ref[L] = flash内部数据(dart_num)
 		}break;
 		case SHOOT_SERIES_MODE:
 		{
-			shoot.fric_spd_ref[R] = r;
-			shoot.fric_spd_ref[L] = l;
 			if (!fric_run_flag)
 			{
-				shoot.fric_spd_ref[R] = 0;
-				shoot.fric_spd_ref[L] = 0;
+				shoot.fric_current[L] = 0;
+				shoot.fric_current[R] = 0;
+			}else{
+				shoot.fric_spd_ref[R] = serial_fric_vel[dart_num];
+				shoot.fric_spd_ref[L] = -serial_fric_vel[dart_num];		
+				Shoot_PID_calu();
 			}
-//			swtich(dart_num)
-//			shoot.fric_spd_ref[R] = flash内部数据(dart_num)
-//			shoot.fric_spd_ref[L] = flash内部数据(dart_num)
 		}break;
 	}
 	
-	Shoot_PID_calu();
 	Shoot_Current_Set();
 }
 
@@ -110,6 +116,9 @@ static void Shoot_Current_Set(void)
 {
 	motor_current.fric[L] = shoot.fric_current[L];
 	motor_current.fric[R] = shoot.fric_current[R];
+	
+	OUTPUT_LIMIT(motor_current.fric[L], 16385, -16385);
+	OUTPUT_LIMIT(motor_current.fric[R], 16385, -16385);
 }
 
 static void Shoot_Motor_Init(void)
@@ -281,13 +290,4 @@ static void Shoot_Status_Init(void)
 	shoot_fsm.status = SHOOT_LOCK;
 	shoot_fsm.event = SHOOT_NULL_EVENT;
 	shoot_fsm.shoot_status_handler = shoot_lock_handler;
-}
-
-
-static uint16_t shoot_interval_cnt;//每发镖的间隔时间，20s内打完
-static uint16_t wait_gate_cnt;//闸门完全开启需要7s，需等待裁判系统开启的标志位，judge_flag;
-
-void Shoot_Tick(void)
-{
-	shoot_interval_cnt ++;
 }

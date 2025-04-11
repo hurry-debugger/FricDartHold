@@ -55,3 +55,6 @@ dart_launcher_mount\main.o: ../comm/can_comm.h
 dart_launcher_mount\main.o: ../bsp/dji_motor.h
 dart_launcher_mount\main.o: ../bsp/bsp_usart.h
 dart_launcher_mount\main.o: ../comm/micro_swicth.h
+dart_launcher_mount\main.o: ../task/reload_task.h
+dart_launcher_mount\main.o: ../task/modeswitch_task.h
+dart_launcher_mount\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h

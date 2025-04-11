@@ -43,8 +43,8 @@
 "dart_launcher_mount\dji_motor.o"
 "dart_launcher_mount\data_scope.o"
 "dart_launcher_mount\bsp_remote_et08.o"
-"dart_launcher_mount\bsp_judge.o"
-"dart_launcher_mount\us_tim.o"
+"dart_launcher_mount\bsp_flash.o"
+"dart_launcher_mount\bsp_serial_screen.o"
 "dart_launcher_mount\can_comm.o"
 "dart_launcher_mount\micro_swicth.o"
 "dart_launcher_mount\shoot_task.o"
@@ -54,6 +54,7 @@
 "dart_launcher_mount\modeswitch_task.o"
 "dart_launcher_mount\pid.o"
 "dart_launcher_mount\math_calcu.o"
+"dart_launcher_mount\crc.o"
 --library_type=microlib --strict --scatter "dart_launcher_mount\dart_launcher_mount.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

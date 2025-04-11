@@ -91,7 +91,7 @@ void DataWave(UART_HandleTypeDef* huart)
     for( uint8_t cnt = 0; cnt < CK.Send_Count; cnt++)
     {
         while((huart->Instance->SR&0X40)==0);
-        huart->Instance->DR = CK.OutPut_Buffer[cnt];
+			huart->Instance->DR = CK.OutPut_Buffer[cnt];
     }
     CK.Data_Num=0;
     CK.Send_Count = 0;

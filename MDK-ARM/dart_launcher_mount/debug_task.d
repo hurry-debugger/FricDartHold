@@ -50,6 +50,7 @@ dart_launcher_mount\debug_task.o: ../bsp/data_scope.h
 dart_launcher_mount\debug_task.o: ../Core/Inc/usart.h
 dart_launcher_mount\debug_task.o: ../Core/Inc/main.h
 dart_launcher_mount\debug_task.o: ../ToolChain-Math/pid.h
+dart_launcher_mount\debug_task.o: ../bsp/bsp_remote_ET08.h
 dart_launcher_mount\debug_task.o: ../comm/can_comm.h
 dart_launcher_mount\debug_task.o: ../bsp/dji_motor.h
 dart_launcher_mount\debug_task.o: ..\task\shoot_task.h
@@ -57,3 +58,4 @@ dart_launcher_mount\debug_task.o: ..\task\gimbal_task.h
 dart_launcher_mount\debug_task.o: ..\task\modeswitch_task.h
 dart_launcher_mount\debug_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 dart_launcher_mount\debug_task.o: ..\task\reload_task.h
+dart_launcher_mount\debug_task.o: ../comm/micro_swicth.h

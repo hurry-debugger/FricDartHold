@@ -51,7 +51,13 @@ dart_launcher_mount\shoot_task.o: ../ToolChain-Math/pid.h
 dart_launcher_mount\shoot_task.o: ../bsp/bsp_remote_ET08.h
 dart_launcher_mount\shoot_task.o: ../Core/Inc/main.h
 dart_launcher_mount\shoot_task.o: ../comm/micro_swicth.h
+dart_launcher_mount\shoot_task.o: ../bsp/bsp_serial_screen.h
+dart_launcher_mount\shoot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 dart_launcher_mount\shoot_task.o: ../comm/can_comm.h
 dart_launcher_mount\shoot_task.o: ../bsp/dji_motor.h
 dart_launcher_mount\shoot_task.o: ..\task\modeswitch_task.h
 dart_launcher_mount\shoot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+dart_launcher_mount\shoot_task.o: ../ToolChain-Math/math_calcu.h
+dart_launcher_mount\shoot_task.o: ../ToolChain-Math/ADRC_TOC_NLADRC.h
+dart_launcher_mount\shoot_task.o: ../ToolChain-Math/rtwtypes.h
+dart_launcher_mount\shoot_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

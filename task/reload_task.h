@@ -70,6 +70,6 @@ typedef struct{
 /******************************/
 
 void Reload_Task(void const* argu);
-
+void Reload_Tick(void);
 
 #endif

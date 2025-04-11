@@ -40,10 +40,7 @@ void ModeSwitch_Task(void const *argu)
 		}
 		else if(lock_flag == UNLOCK)
 		{                           
-			if(gimbal_zero != FOUND && reload_zero != FOUND)	//判断电机初始化是否完成
-				ctrl_mode = INIT_MODE;
-			else 
-				sw1_mode_handler();
+			sw1_mode_handler();
 		}
 	 
 		osDelayUntil(&mode_wake_time, MODESWITCH_PERIOD);
@@ -86,8 +83,8 @@ static void sw1_mode_handler(void)
 			break;
 		}
 	}
-//				等待电机初始化											保护优先级最高			等待回正
-	if ((gimbal_zero == NOFOUND || reload_zero == NOFOUND) && ctrl_mode != PROTECT_MODE &&(SBUS.Ch3 < 600 && SBUS.Ch4  < 600))
+//				等待电机初始化											保护优先级最高
+	if ((gimbal_zero == NOFOUND || reload_zero == NOFOUND) && ctrl_mode != PROTECT_MODE)
 		ctrl_mode = INIT_MODE;
 	
 	taskEXIT_CRITICAL();

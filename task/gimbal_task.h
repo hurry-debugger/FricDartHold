@@ -11,7 +11,7 @@
 
 #define GIMBAL_MAX_RIGHT   -213000
 
-#define VISION_SPEED_LIMIT  300
+#define VISION_SPEED_LIMIT  200
 
 #define GIMBAL_MAX_SPEED    8192*8  
 

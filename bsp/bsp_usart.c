@@ -5,12 +5,11 @@
 #include "stdarg.h"
 
 #include "bsp_remote_ET08.h"
-#include "bsp_judge.h"
-
+#include "bsp_serial_screen.h"
 
 uint8_t dma_dbus_buf[DMA_DBUS_LEN];
 uint8_t dma_judge_buf[DMA_JUDGE_LEN];
-uint8_t dma_screen_buf[DMA_JUDGE_LEN];
+uint8_t dma_screen_buf[DMA_SCREEN_LEN];
 
  /**
   * @brief  各个串口功能函数
@@ -25,11 +24,17 @@ void USER_UART_IDLECallback(UART_HandleTypeDef *huart)
         memset(dma_dbus_buf, 0, DMA_DBUS_LEN);
         HAL_UART_Receive_DMA(huart, dma_dbus_buf, DMA_DBUS_LEN);
     }
-	 if (huart->Instance == USART3) //DBUS串口
+	 if (huart->Instance == USART3) //JUDGE串口
     {
-		Judge_Read_Data(dma_judge_buf);
+//		Judge_Read_Data(dma_judge_buf);
         memset(dma_dbus_buf, 0, DMA_JUDGE_LEN);
         HAL_UART_Receive_DMA(huart, dma_judge_buf, DMA_JUDGE_LEN);
+    }
+	if (huart->Instance == UART5) //SCREEN串口
+    {
+		Serial_Screen_Handle(dma_screen_buf);
+//		memset(dma_screen_buf, 0, DMA_SCREEN_LEN);
+        HAL_UART_Receive_DMA(huart, dma_screen_buf, DMA_SCREEN_LEN);
     }
 }
 
@@ -67,7 +72,7 @@ void USER_UART_Init(void)
 	
 	 __HAL_UART_CLEAR_IDLEFLAG(&SERIAL_SCREEN_HUART);
     __HAL_UART_ENABLE_IT(&SERIAL_SCREEN_HUART, UART_IT_IDLE);
-    HAL_UART_Receive_DMA(&SERIAL_SCREEN_HUART, dma_judge_buf, DMA_JUDGE_LEN);
+    HAL_UART_Receive_DMA(&SERIAL_SCREEN_HUART, dma_screen_buf, DMA_SCREEN_LEN);
 	
 }
 
@@ -86,7 +91,8 @@ void Uart_printf(UART_HandleTypeDef *huart,char *format, ...)
 	va_start(args, format);
 	uint16_t len = vsnprintf((char *)buf, sizeof(buf), (char *)format, args);
 	va_end(args);
-	state = HAL_UART_Transmit_DMA(huart,(uint8_t *)buf,len);
+	state = HAL_UART_Transmit(huart,(uint8_t *)buf,	len, 0xff);
+	
 	if(state == HAL_BUSY)
 		cnt++;
 }
